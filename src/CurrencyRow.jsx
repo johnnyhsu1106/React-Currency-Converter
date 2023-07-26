@@ -1,4 +1,6 @@
-import React from 'react'
+import CurrencyInput from './CurrencyInput';
+import CurrencyDropdown from './CurrencyDropdown';
+
 
 const CurrencyRow = ({
   amount,  
@@ -10,29 +12,16 @@ const CurrencyRow = ({
 
   return (
     <>
-      <input
-        className='input' 
-        type='number'
-        value={amount}
-        onChange={(e) => {onChangeAmount(e.target.value)}} 
+      <CurrencyInput
+        amount={amount}
+        onChangeAmount={onChangeAmount} 
       />
-      <select 
-        value={selectedCurrency}
-        onChange={(e) => {onSelectCurrency(e.target.value)}}
-      >
-        
-        {currencyOptions.map((currencyOption) => {
-          return (
-            <option
-              key={currencyOption} 
-              value={currencyOption}
-            >
-              {currencyOption}
-            </option>
-            )
-           })
-        }
-      </select>
+
+      <CurrencyDropdown 
+        selectedCurrency={selectedCurrency}
+        currencyOptions={currencyOptions}
+        onSelectCurrency={onSelectCurrency}
+      />
     </>
   )
 }

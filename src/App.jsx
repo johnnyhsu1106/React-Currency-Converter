@@ -32,7 +32,7 @@ const App = () => {
     fetch(`${BASE_URL}/latest?base=${fromCurrency}&symbols=${toCurrency}`, REQUEST_BODY)
     .then((res) => {
       if (!res.ok) {
-        throw Error('Invalid Https Request');
+        throw new Error('Invalid Https Request');
       }
       return res.json();
     })
@@ -50,7 +50,7 @@ const App = () => {
     fetch(`${BASE_URL}/symbols`, REQUEST_BODY)
     .then((res) => {
       if (!res.ok) {
-        throw Error('Invalid Https Request');
+        throw new Error('Invalid Https Request');
       }
       return res.json();
     })
@@ -73,7 +73,7 @@ const App = () => {
     fetch(`${BASE_URL}/latest?base=${fromCurrency}&symbols=${toCurrency}`, REQUEST_BODY)
       .then((res) => {
         if (!res.ok) {
-          throw Error('Invalid Https Request');
+          throw new Error('Invalid Https Request');
         }
         return res.json();
       })
