@@ -1,8 +1,7 @@
 import CurrencyInput from './CurrencyInput';
 import CurrencyDropdown from './CurrencyDropdown';
 
-
-const CurrencyRow = ({
+const CurrencyRow = ({  
   amount,  
   currencyOptions,
   selectedCurrency,
