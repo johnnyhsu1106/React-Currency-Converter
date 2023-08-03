@@ -4,7 +4,7 @@ import CurrencyRow from './CurrencyRow'
 import './App.css'
 
 const BASE_URL = 'https://api.apilayer.com/exchangerates_data';
-const API_KEY = 'mtsdFo6rgOcDbBb8pIAnUp88mExjITIz';
+const API_KEY = import.meta.env.VITE_API_TOKEN;
 const REQUEST_BODY = {
   method: 'GET',
   redirect: 'follow',
