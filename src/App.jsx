@@ -1,10 +1,9 @@
-
 import CurrencyConverter from './components/CurrencyConverter';
 import { CurrencyProvider } from './context/CurrencyContext';
 import './App.css'
 
-const App = () => {
 
+const App = () => {
   return (
     <CurrencyProvider>
       <CurrencyConverter />
