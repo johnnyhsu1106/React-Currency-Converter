@@ -6,29 +6,3 @@ body {
   min-height: 100vh;
   text-align: center;
 }
-
-h1 {
-  margin: 0;
-  margin-bottom: .5rem;
-}
-
-.input {
-  border: 1px solid #333;
-  border-radius: .3em;
-  padding: .25rem;
-  height: 35px;
-  width: 10em;
-}
-
-select {
-  margin-left: .5rem;
-  border: 1px solid #333;
-  border-radius: .3em;
-  padding: .25rem;
-  height:  45px;
-  width: 5em;
-}
-
-.equals {
-  font-size: 1.5rem;
-}
