@@ -1,4 +1,3 @@
-
 import CurrencyInput from './CurrencyInput';
 import CurrencyDropdown from './CurrencyDropdown';
 

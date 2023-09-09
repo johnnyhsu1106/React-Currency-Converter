@@ -2,6 +2,7 @@ import CurrencyRow from './CurrencyRow';
 import { useCurrencyContext } from '../context/CurrencyContext';
 import style from './CurrencyConverter.module.css';
 
+
 const CurrencyConverter = () => {
   const {
     isLoading,
@@ -11,7 +12,7 @@ const CurrencyConverter = () => {
   if (isLoading) {
     return <p>Loading...</p>
   }
-  
+
   if (isError) {
     return <p>Something goes wrong</p>
   }

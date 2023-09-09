@@ -19,7 +19,6 @@ const useCurrencyContext = () => {
 };
 
 const CurrencyProvider = ({ children }) => {
-
   const [currencyOptions, setCurrencyOptions] = useState([]);
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('TWD');
