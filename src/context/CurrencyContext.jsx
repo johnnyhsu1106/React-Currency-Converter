@@ -90,9 +90,6 @@ const CurrencyProvider = ({ children }) => {
     }
 
     const controller = new AbortController();
-    
-    setIsLoading(true);
-    setIsError(false);
 
     fetch(`${BASE_URL}/latest?base=${fromCurrency}&symbols=${toCurrency}`, {...REQUEST_BODY, signal: controller.signal})
       .then((res) => {
@@ -109,11 +106,7 @@ const CurrencyProvider = ({ children }) => {
         if (err.name === 'AbortError') {
           return;
         }
-        setIsError(true);
         console.error(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
       })
 
   }, [fromCurrency, toCurrency]);
