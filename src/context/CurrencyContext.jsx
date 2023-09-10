@@ -32,30 +32,6 @@ const CurrencyProvider = ({ children }) => {
   const fromAmount = amountInFromCurrency ? amount : amount / exchangeRate; 
   const toAmount = amountInFromCurrency ? amount * exchangeRate : amount;
 
-  // Get Initial Exchange Rate 
-  useEffect(() => {
-    setIsLoading(true);
-    setIsError(false);
-
-    fetch(`${BASE_URL}/latest?base=${fromCurrency}&symbols=${toCurrency}`, REQUEST_BODY)
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error('Invalid Https Request');
-      }
-      return res.json();
-    })
-    .then((data) => {
-      const { rates } = data;
-      setExchangeRate(rates[toCurrency]);
-    })
-    .catch((err) => {
-      setIsError(true);
-      console.error(err);
-    })
-    .finally(() => {
-      setIsLoading(false);
-    })
-  }, []);
 
   // Get Currency Options 
   useEffect(() => {
@@ -83,17 +59,14 @@ const CurrencyProvider = ({ children }) => {
     })
   }, []);
 
-  // Update Exchange Rate if fromCurrency or toCurrency is changed.
+  // Get Exchange at first and Update Exchange Rate if fromCurrency or toCurrency is changed.
   useEffect(() => {
-    if (fromCurrency === null || toCurrency === null) {
-      return;
-    }
-
-    
     const controller = new AbortController();
+    const { signal } = controller;
+        
     setIsError(false);
 
-    fetch(`${BASE_URL}/latest?base=${fromCurrency}&symbols=${toCurrency}`, {...REQUEST_BODY, signal: controller.signal})
+    fetch(`${BASE_URL}/latest?base=${fromCurrency}&symbols=${toCurrency}`, {...REQUEST_BODY, signal })
       .then((res) => {
         if (!res.ok) {
           throw new Error('Invalid Https Request');
@@ -111,6 +84,10 @@ const CurrencyProvider = ({ children }) => {
         setIsError(true);
         console.error(err);
       })
+    
+      return () => {
+        controller.abort();
+      }
 
   }, [fromCurrency, toCurrency]);
 
