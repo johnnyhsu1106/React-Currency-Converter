@@ -110,7 +110,7 @@ const CurrencyProvider = ({ children }) => {
     setAmountInFromCurrency(false);
   };
   
-  const context = {
+  const value = {
     isLoading,
     isError,
     currencyOptions,
@@ -125,7 +125,7 @@ const CurrencyProvider = ({ children }) => {
   };
 
   return (
-    <CurrencyContext.Provider value={context}>
+    <CurrencyContext.Provider value={value}>
       {children}
     </CurrencyContext.Provider> 
   )
