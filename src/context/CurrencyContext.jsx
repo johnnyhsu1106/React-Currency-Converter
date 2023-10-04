@@ -15,7 +15,11 @@ const REQUEST_BODY = {
 const CurrencyContext = createContext()
 
 const useCurrencyContext = () => {
-  return useContext(CurrencyContext)
+  const context = useContext(CurrencyContext);
+  if (context === undefined) {
+    throw new Error('useCurrencyContext must be used within CurrencyProvder');
+  }
+  return context;
 };
 
 const CurrencyProvider = ({ children }) => {
