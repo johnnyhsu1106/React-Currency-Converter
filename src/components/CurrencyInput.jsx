@@ -19,7 +19,7 @@ const CurrencyInput = ({ type }) => {
       className={style.input}
       type='number'
       value={amount}
-      onChange={(e) => {onChangeAmount(e.target.value)}} 
+      onChange={(e) => {onChangeAmount(Number(e.target.value))}} 
     />
   )
 }
