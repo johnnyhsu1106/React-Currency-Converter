@@ -29,7 +29,6 @@ const CurrencyProvider = ({ children }) => {
   const [amount, setAmount] = useState(1);
   const [exchangeRate, setExchangeRate] = useState(1);
   const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   // Get Derived States
@@ -39,7 +38,6 @@ const CurrencyProvider = ({ children }) => {
 
   // Get Currency Options 
   useEffect(() => {
-    setIsLoading(true);
     setIsError(false);
 
     fetch(`${BASE_URL}/symbols`, REQUEST_BODY)
@@ -57,9 +55,6 @@ const CurrencyProvider = ({ children }) => {
     .catch((err) => {
       setIsError(true);
       console.error(err);
-    })
-    .finally(() => {
-      setIsLoading(false);
     })
   }, []);
 
@@ -115,7 +110,6 @@ const CurrencyProvider = ({ children }) => {
   };
   
   const value = {
-    isLoading,
     isError,
     currencyOptions,
     fromAmount,

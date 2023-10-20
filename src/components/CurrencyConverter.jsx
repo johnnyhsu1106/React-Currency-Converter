@@ -5,14 +5,9 @@ import style from './CurrencyConverter.module.css';
 
 const CurrencyConverter = () => {
   const {
-    isLoading,
     isError,
   } = useCurrencyContext();
   
-  if (isLoading) {
-    return <p>Loading...</p>
-  }
-
   if (isError) {
     return <p>Something goes wrong</p>
   }
