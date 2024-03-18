@@ -1,13 +1,7 @@
 # Getting Started
 This is a currency conventer built based on React.
 
-<<<<<<< HEAD
 App: https://react-currency-converter-by-jh.web.app/
-=======
-
-App: https://react-currency-converter-by-jh.web.app/
-
->>>>>>> 2cffe276062d5c35c0366767d2d7517bffb18351
 
 Checkout this repo, install dependencies, then start the gulp process with the following:
 ```

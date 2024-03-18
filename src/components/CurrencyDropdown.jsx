@@ -13,13 +13,13 @@ const CurrencyDropdown = ({ type }) => {
   
   const isFromRow = type === 'from';
   const selectedCurrency = isFromRow ? fromCurrency : toCurrency;
-  const onSelectCurrency = isFromRow ? handleFromCurrencySelect : handleToCurrencySelect;
+  const handleCurrencySelect = isFromRow ? handleFromCurrencySelect : handleToCurrencySelect;
   
   return (
     <select
       className={style.options}
       value={selectedCurrency}
-      onChange={(e) => { onSelectCurrency(e.target.value) }}
+      onChange={(e) => { handleCurrencySelect(e.target.value) }}
     >
 
       {currencyOptions.map((currencyOption) => {

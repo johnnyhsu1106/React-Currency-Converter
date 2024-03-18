@@ -12,11 +12,11 @@ const REQUEST_BODY = {
   }
 };
 
-const CurrencyContext = createContext()
+const CurrencyContext = createContext(null)
 
 const useCurrencyContext = () => {
   const context = useContext(CurrencyContext);
-  if (context === undefined) {
+  if (context === null) {
     throw new Error('useCurrencyContext must be used within CurrencyProvder');
   }
   return context;
@@ -32,10 +32,10 @@ const CurrencyProvider = ({ children }) => {
   const [isError, setIsError] = useState(false);
 
   // Get Derived States
-  const fromAmount = amountInFromCurrency ? amount : amount / exchangeRate; 
-  const toAmount = amountInFromCurrency ? amount * exchangeRate : amount;
 
-
+  const fromAmount = amountInFromCurrency ? amount : (amount / exchangeRate).toFixed(4); 
+  const toAmount = amountInFromCurrency ? (amount * exchangeRate).toFixed(4) : amount;
+  
   // Get Currency Options 
   useEffect(() => {
     setIsError(false);
@@ -48,6 +48,7 @@ const CurrencyProvider = ({ children }) => {
       return res.json();
     })
     .then((data) => {
+      console.log('data ', data);
       const { symbols } = data;
       const currencies = Object.keys(symbols);
       setCurrencyOptions(currencies);
