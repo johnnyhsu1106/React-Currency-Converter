@@ -2,11 +2,11 @@ import CurrencyInput from './CurrencyInput';
 import CurrencyDropdown from './CurrencyDropdown';
 
 
-const CurrencyRow = ({ type }) => {
+const CurrencyRow = ({ isFromRow }) => {
   return (
     <>
-      <CurrencyInput type={type} />
-      <CurrencyDropdown type={type}/>
+      <CurrencyInput isFromRow={isFromRow} />
+      <CurrencyDropdown isFromRow={isFromRow}/>
     </>
   )
 }

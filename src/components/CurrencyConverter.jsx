@@ -15,9 +15,9 @@ const CurrencyConverter = () => {
   return (
     <>
       <h1 className='title'>Convert Currency</h1>
-      <CurrencyRow type='from' />
+      <CurrencyRow isFromRow={true} />
       <div className={style.equals}> = </div>
-      <CurrencyRow type='to' />
+      <CurrencyRow isFromRow={false} />
     </>
   )
 }

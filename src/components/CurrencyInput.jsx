@@ -2,17 +2,12 @@ import { useCurrencyContext } from '../context/CurrencyContext';
 import style from './CurrencyConverter.module.css';
 
 
-const CurrencyInput = ({ type }) => {
+const CurrencyInput = ({ isFromRow }) => {
   const {
     fromAmount,
     toAmount,
-    handleFromAmountChange,
-    handleToAmountChange,
+    handleAmountChange,
   } = useCurrencyContext();
-  
-  const isFromRow = type === 'from';
-  const amount = isFromRow ? fromAmount : toAmount;
-  const handleAmountChange = isFromRow ? handleFromAmountChange : handleToAmountChange;
 
   return (
     <input
@@ -20,8 +15,9 @@ const CurrencyInput = ({ type }) => {
       type='number'
       min={0}
       step={1}
-      value={amount}
-      onChange={(e) => {handleAmountChange(Number(e.target.value))}} 
+      value={ isFromRow ? fromAmount : toAmount }
+      // value={amount}
+      onChange={(e) => {handleAmountChange(Number(e.target.value), isFromRow)}} 
     />
   )
 }

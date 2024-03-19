@@ -2,24 +2,19 @@ import { useCurrencyContext } from '../context/CurrencyContext';
 import style from './CurrencyConverter.module.css';
 
 
-const CurrencyDropdown = ({ type }) => {
+const CurrencyDropdown = ({ isFromRow }) => {
   const {
     currencyOptions,
     fromCurrency,
     toCurrency,
-    handleFromCurrencySelect,
-    handleToCurrencySelect,
+    handleCurrencySelect
   } = useCurrencyContext();
-  
-  const isFromRow = type === 'from';
-  const selectedCurrency = isFromRow ? fromCurrency : toCurrency;
-  const handleCurrencySelect = isFromRow ? handleFromCurrencySelect : handleToCurrencySelect;
   
   return (
     <select
       className={style.options}
-      value={selectedCurrency}
-      onChange={(e) => { handleCurrencySelect(e.target.value) }}
+      value = { isFromRow ? fromCurrency : toCurrency }
+      onChange={(e) => { handleCurrencySelect(e.target.value, isFromRow) }}
     >
 
       {currencyOptions.map((currencyOption) => {

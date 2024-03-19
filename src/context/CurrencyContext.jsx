@@ -11,6 +11,9 @@ const REQUEST_BODY = {
     'apikey': API_KEY
   }
 };
+const DEFAULT_FROM_CURRENCY = 'USD';
+const DEFAULT_TO_CURRENCY = 'TWD';
+const FIX_DECIMAL = 6;
 
 const CurrencyContext = createContext(null)
 
@@ -24,19 +27,18 @@ const useCurrencyContext = () => {
 
 const CurrencyProvider = ({ children }) => {
   const [currencyOptions, setCurrencyOptions] = useState([]);
-  const [fromCurrency, setFromCurrency] = useState('USD');
-  const [toCurrency, setToCurrency] = useState('TWD');
+  const [fromCurrency, setFromCurrency] = useState(DEFAULT_FROM_CURRENCY);
+  const [toCurrency, setToCurrency] = useState(DEFAULT_TO_CURRENCY);
   const [amount, setAmount] = useState(1);
   const [exchangeRate, setExchangeRate] = useState(1);
-  const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+  const [isAmountChangedInFromCurrency, setIsAmountChangedInFromCurrency] = useState(true);
   const [isError, setIsError] = useState(false);
 
   // Get Derived States
-
-  const fromAmount = amountInFromCurrency ? amount : (amount / exchangeRate).toFixed(4); 
-  const toAmount = amountInFromCurrency ? (amount * exchangeRate).toFixed(4) : amount;
+  const fromAmount = isAmountChangedInFromCurrency ? amount : (amount / exchangeRate).toFixed(FIX_DECIMAL); 
+  const toAmount = isAmountChangedInFromCurrency ? (amount * exchangeRate).toFixed(FIX_DECIMAL) : amount;
   
-  // Get Currency Options 
+  // Get Currency Options at page load
   useEffect(() => {
     setIsError(false);
 
@@ -48,7 +50,6 @@ const CurrencyProvider = ({ children }) => {
       return res.json();
     })
     .then((data) => {
-      console.log('data ', data);
       const { symbols } = data;
       const currencies = Object.keys(symbols);
       setCurrencyOptions(currencies);
@@ -91,23 +92,22 @@ const CurrencyProvider = ({ children }) => {
 
   }, [fromCurrency, toCurrency]);
 
-
-  const handleFromCurrencySelect = (currency) => {
-    setFromCurrency(currency);
+  const handleCurrencySelect = (currency, isFromRow) => {
+    if (isFromRow) {
+      setFromCurrency(currency);
+    } else {
+      setToCurrency(currency);
+    }
   };
 
-  const handleToCurrencySelect = (currency) => {
-    setToCurrency(currency);
-  };
-
-  const handleFromAmountChange = (amount) => {
-    setAmount(amount);
-    setAmountInFromCurrency(true);
-  };
-
-  const handleToAmountChange = (amount) => {
-    setAmount(amount);
-    setAmountInFromCurrency(false);
+  const handleAmountChange = (amount, isFromRow) => {
+    if (isFromRow) {
+      setAmount(amount);
+      setIsAmountChangedInFromCurrency(true);
+    } else {
+      setAmount(amount);
+      setIsAmountChangedInFromCurrency(false);
+    }
   };
   
   const value = {
@@ -117,10 +117,8 @@ const CurrencyProvider = ({ children }) => {
     fromCurrency,
     toAmount,
     toCurrency,
-    handleFromCurrencySelect,
-    handleFromAmountChange,
-    handleToCurrencySelect,
-    handleToAmountChange,
+    handleCurrencySelect,
+    handleAmountChange
   };
 
   return (
