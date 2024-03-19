@@ -1,6 +1,6 @@
 import { useCurrencyContext } from '../context/CurrencyContext';
 import style from './CurrencyConverter.module.css';
-
+import PropTypes from 'prop-types';
 
 const CurrencyInput = ({ isFromRow }) => {
   const {
@@ -16,10 +16,13 @@ const CurrencyInput = ({ isFromRow }) => {
       min={0}
       step={1}
       value={ isFromRow ? fromAmount : toAmount }
-      // value={amount}
       onChange={(e) => {handleAmountChange(Number(e.target.value), isFromRow)}} 
     />
   )
-}
+};
+
+CurrencyInput.propTypes = {
+  isFromRow: PropTypes.bool.isRequired
+};
 
 export default CurrencyInput;

@@ -101,13 +101,8 @@ const CurrencyProvider = ({ children }) => {
   };
 
   const handleAmountChange = (amount, isFromRow) => {
-    if (isFromRow) {
-      setAmount(amount);
-      setIsAmountChangedInFromCurrency(true);
-    } else {
-      setAmount(amount);
-      setIsAmountChangedInFromCurrency(false);
-    }
+    setAmount(amount);
+    setIsAmountChangedInFromCurrency(isFromRow);
   };
   
   const value = {

@@ -1,6 +1,6 @@
 import { useCurrencyContext } from '../context/CurrencyContext';
 import style from './CurrencyConverter.module.css';
-
+import PropTypes from 'prop-types';
 
 const CurrencyDropdown = ({ isFromRow }) => {
   const {
@@ -30,6 +30,10 @@ const CurrencyDropdown = ({ isFromRow }) => {
       }
     </select>
   )
-}
+};
+
+CurrencyDropdown.propTypes = {
+  isFromRow: PropTypes.bool.isRequired
+};
 
 export default CurrencyDropdown
